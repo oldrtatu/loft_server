@@ -1,0 +1,8 @@
+{
+  "name": "loft_server",
+  "version": "0.0.1",
+  "description": "Server App for Lofty Logisitcs App",
+  "main": "index.js",
+  "author": "rtatu <rohit.tatu896@gmail.com>",
+  "license": "Apache"
+}
