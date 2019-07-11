@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+
+const dotenv = require("dotenv")
+dotenv.config()
+
+const app = require('../app')
+const http = require('http')
+
+const PORT = process.env.PORT || 3000
+
+const config = require('../config/db_config')
+
+const Sequelize = require('sequelize')
+
+const sequelize = new Sequelize(
+  config.mysql.DB_NAME, config.mysql.DB_USER, config.mysql.DB_PASSWORD, {
+  dialect : config.mysql.DIALECT,
+  host : config.mysql.DB_HOST
+})
+
+// sequelize.authenticate
+/*
+  connect to mysql shell = ? \connect user@host:port
+  if the error is -> Client does not support authentication protocol requested by server
+  then(
+    (changepassword) => ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'
+  )
+  then(
+    (privileges) => flush privileges;
+  )
+
+*/
+sequelize
+.authenticate()
+.then(() => console.log("connected to mysql"))
+.catch((err) => {
+  console.error(err)
+  process.exit(1)
+})
+
+
+const server = http.createServer(app)
+
+server.listen(PORT, () => console.log("Server Started at port", PORT))
