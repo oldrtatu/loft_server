@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
+/*
+  to do -->
+  1. Create onerror and onlistening methods in server
+
+*/
+
 const dotenv = require("dotenv")
 dotenv.config()
 
@@ -11,6 +17,7 @@ const PORT = process.env.PORT || 3000
 const config = require('../config/db_config')
 
 const Sequelize = require('sequelize')
+
 
 const sequelize = new Sequelize(
   config.mysql.DB_NAME, config.mysql.DB_USER, config.mysql.DB_PASSWORD, {
@@ -42,3 +49,7 @@ sequelize
 const server = http.createServer(app)
 
 server.listen(PORT, () => console.log("Server Started at port", PORT))
+
+
+// exporting server module for testing
+module.exports = server 
