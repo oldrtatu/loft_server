@@ -1,6 +1,3 @@
-const dotenv = require('dotenv')
-dotenv.config()
-
 module.exports = {
     appName : "Lofty Logistics",
     mysql : {
