@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+const logger = require('../logger/logger')
 const basename = path.basename(__filename);
 
 const config = require('../config/db_config')
@@ -10,7 +11,7 @@ let sequelize = new Sequelize(
   config.mysql.DB_NAME, config.mysql.DB_USER, config.mysql.DB_PASSWORD, {
   dialect : config.mysql.DIALECT,
   host : config.mysql.DB_HOST,
-  logging : false // till now it is false
+  logging : false // change it soon
 })
 
 // sequelize.authenticate

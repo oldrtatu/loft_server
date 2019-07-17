@@ -28,7 +28,7 @@ router.post('/', async (req, res, next) => {
         res.status(400).send(response)
         res.end()
     })
-    
+
     if(service) {
         res.status(201).json({
             "code" : "ADD_SUCC",
@@ -98,6 +98,5 @@ router.delete('/', async (req, res, next) => {
 
 })
 
-
-
+// exports the router
 module.exports = router

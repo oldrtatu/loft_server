@@ -79,7 +79,6 @@ describe('POST service', () => {
             })
     })
 
-    // ER_DUP_ENTRY
 
     it("it should return an error for unique validation", (done) => {
         chai.request(server)
@@ -99,7 +98,6 @@ describe('POST service', () => {
             })
     })
 
-    // WARN_DATA_TRUNCATED
 
     it("it should return an error for value not in enum", (done) => {
         chai.request(server)
@@ -128,16 +126,6 @@ describe('POST service', () => {
 
 
 // Test the /PUT Route
-
-/*
-        * this is a comment
-
-*/
-
-/*
-@param and self cons
-*/
-
 describe('PUT Service', () => {
 
     it("it should update an existing service", (done) => {
@@ -219,11 +207,11 @@ describe('DELETE Service', () => {
         server.close()
         done()
     })
+
 })
 
 
 // Test Last Get Route
-
 describe('GET service', () => {
 
     it("at the end of service test, it should get all the list of services", (done) => {
@@ -241,6 +229,5 @@ describe('GET service', () => {
         server.close()
         done()
     })
-
 
 })
