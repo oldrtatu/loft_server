@@ -8,9 +8,14 @@ const archive = require('./routes/archive/')
 const root = require('./routes/')
 
 
-app.use(morgan('dev'));
+
+// app.use(morgan('dev', {stream : console.log('Rohit')}))
+
+
+
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
+
 
 // cors enabled
 app.use((req, res, next) => {

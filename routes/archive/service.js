@@ -9,6 +9,7 @@ const Error = require('../../utils/Error')
 router.get('/', async (req, res, next) => {
     let services = await model.service.findAll({}).catch(err => {
         let response = Error.SequelizeErrorFormat(err)
+        console.log(response)
         res.status(400).send(response)
     })
     res.status(200).json(services)
@@ -25,12 +26,15 @@ router.post('/', async (req, res, next) => {
     }).catch(err => {
         let response = Error.SequelizeErrorFormat(err)
         res.status(400).send(response)
+        res.end()
     })
-
-    res.status(201).json({
-        "CODE" : "ADD_SUCC",
-        response : service
-    })
+    
+    if(service) {
+        res.status(201).json({
+            "code" : "ADD_SUCC",
+            response : service
+        })
+    }
 
 })
 
@@ -77,7 +81,6 @@ router.delete('/', async (req, res, next) => {
         res.status(400).send(response)
     })
 
-    console.log(service)
 
     if(service === 1) {
         res.status(200).json({

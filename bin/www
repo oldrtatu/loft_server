@@ -27,5 +27,6 @@ model.sequelize.sync().then(function(){
   server.listen(PORT, () => console.log("Server Started at port", PORT))
 }).catch(err => console.log(err))
 
-// exporting server module for testing
-module.exports = server 
+
+
+module.exports = server
