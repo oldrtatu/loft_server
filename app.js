@@ -8,7 +8,7 @@ const logger = require('./logger/logger')
 const archive = require('./routes/archive/')
 const root = require('./routes/')
 
-app.use(morgan('dev', {stream : logger.stream}))
+// app.use(morgan('dev', {stream : logger.stream}))
 
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
