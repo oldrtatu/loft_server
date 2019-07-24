@@ -6,60 +6,53 @@ const util = require('util')
 const Error = require('../../utils/Error')
 
 
-// get all trucks
+// get all locations
 router.get('/', async (req, res, next) => {
-    let queryResult = await model.truck.findAll({
-        include : [
-            {
-                model : model.class,
-                as : "category",
-                attributes : ["id", "name"]
-            },
-            {
-                model : model.subsidiary,
-                as : "division",
-                attributes : ["id", "name"]
-            },
-            {
-                model : model.truckRegistration
-            }
-        ],
-        attributes : {
-            exclude : ['categoryId', 'divisionId', 'createdAt', 'updatedAt']
-        }
+    let queryResult = await model.location.findAll({
+        include : model.address
     }).catch(err => {
-        console.log(err)
         let response = Error.SequelizeErrorFormat(err)
+        console.log(response)
         res.status(400).send(response)
     })
+
+    // send the response
     res.status(200).json(queryResult)
 })
 
-// create a truck
+
+
+// create a location
 router.post('/', async (req, res, next) => {
 
-    // now add truck
-    let truck = await model.truck.create( req.body, {
-        include : [model.truckRegistration]
-    } ).catch(err => {
+    /**
+     *  add the location including address
+     */
+    let location = await model.location.create( req.body , {
+        include : [model.address]
+    }).catch(err => {
+        console.log(err)
         let response = Error.SequelizeErrorFormat(err)
         res.status(400).send(response)
         res.end()
     })
 
-    if(truck) {
+    // send the response
+    if(location) {
         res.status(201).json({
             "code" : "ADD_SUCC",
-            response : truck
+            response : location
         })
     }
 
 })
 
-// update a truck
+
+// update a location
 router.put('/', async (req, res, next) => {
-    // update only truck
-    let queryResult = await model.truck.update(req.body, {
+
+    // update only location
+    let queryResult = await model.location.update(req.body, {
         where: {
             id: req.body.id
         }
@@ -68,28 +61,27 @@ router.put('/', async (req, res, next) => {
         res.status(400).send(response)
     })
 
-    // now get related truck to the registration if request body object has registration object
-    let truck = (req.body.truckRegistration) ? await model.truck.findByPk(req.body.id, {
-        include : model.truckRegistration
+    // now get related to the address if request body object has address object
+    let location = (req.body.address) ? await model.location.findByPk(req.body.id, {
+        include : model.address
     }).catch(err => {
         let response = Error.SequelizeErrorFormat(err)
         res.status(400).send(response)
     }) : undefined
 
 
-    // if truck !== undefined
-    if(truck) {
+    // if location !== undefined
+    if(location) {
 
-        if(truck.truckRegistration === null) {
-            truckRegistration = await truck.createTruckRegistration(req.body.truckRegistration)
-                                .catch(err => {
-                                    let response = Error.SequelizeErrorFormat(err)
-                                    res.status(400).send(response)
-                                })
+        if(location.address === null) {
+            address = await location.createAddress(req.body.address).catch(err => {
+                let response = Error.SequelizeErrorFormat(err)
+                res.status(400).send(response)
+            })
         } else {
-            truckRegistration = await model.truckRegistration.update(req.body.truckRegistration, {
+            address = await model.address.update(req.body.address, {
                 where : {
-                    id : truck.truckRegistration.id
+                    id : location.address.id
                 }
             }).catch(err => {
                 let response = Error.SequelizeErrorFormat(err)
@@ -112,14 +104,13 @@ router.put('/', async (req, res, next) => {
         })
     }
 
-
-
 })
 
-// delete a truck
+
+// delete a location
 router.delete('/', async (req, res, next) => {
 
-    let queryResult = await model.truck.destroy({
+    let queryResult = await model.location.destroy({
         where: { id: req.body.id }
     }).catch(err => {
         let response = Error.SequelizeErrorFormat(err)

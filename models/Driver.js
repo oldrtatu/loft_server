@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    let Subsidiary = sequelize.define('subsidiary', {
+    let Driver = sequelize.define('driver', {
         id : {
             type : DataTypes.INTEGER(11),
             primaryKey : true,
@@ -17,10 +17,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false,
             unique : true,
         },
-        unitNo : {
-            type : DataTypes.STRING,
-            allowNull : true,
-        },
         phone : {
             type : DataTypes.STRING,
             allowNull : true
@@ -29,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
             type : DataTypes.STRING,
             allowNull : true
         },
-        fax : {
+        uscell : {
             type : DataTypes.STRING,
             allowNull : true
         },
@@ -44,11 +40,11 @@ module.exports = (sequelize, DataTypes) => {
 
     })
 
-    Subsidiary.associate = (model) => {
-        Subsidiary.hasOne(model.address, {
+    Driver.associate = (model) => {
+        Driver.hasOne(model.address, {
             onDelete : "CASCADE"
         })
     }
 
-    return Subsidiary
+    return Driver
 }

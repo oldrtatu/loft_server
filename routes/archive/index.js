@@ -8,6 +8,8 @@ const Class = require('./class')
 const paymentTerm = require('./paymentTerm')
 const subsidary  = require('./subsidiary')
 const truck  = require('./truck')
+const driver = require('./driver')
+const location = require('./location')
 
 router.get('/', (req,res,next) => {
     res.status(400).json({message : "yay"})
@@ -19,5 +21,8 @@ router.use('/class', Class)
 router.use('/payterm', paymentTerm) // Payment Term Route
 router.use('/subsidiary', subsidary)
 router.use('/truck', truck)
+router.use('/driver', driver)
+router.use('/location', location)
+
 
 module.exports = router
