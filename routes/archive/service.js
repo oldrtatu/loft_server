@@ -81,7 +81,6 @@ router.delete('/', async (req, res, next) => {
         res.status(400).send(response)
     })
 
-
     if(service === 1) {
         res.status(200).json({
             'code' : "DELETE_SUCC",
