@@ -11,6 +11,7 @@ const truck = require("./truck");
 const driver = require("./driver");
 const location = require("./location");
 const terminal = require("./terminal");
+const contact = require("./contact");
 
 router.get("/", (req, res, next) => {
   res.status(400).json({ message: "yay" });
@@ -25,5 +26,6 @@ router.use("/truck", truck);
 router.use("/driver", driver);
 router.use("/location", location);
 router.use("/terminal", terminal);
+router.use("/contact", contact);
 
 module.exports = router;

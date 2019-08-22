@@ -46,5 +46,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
+  Contact.associate = model => {
+    Contact.belongsTo(model.customer);
+  };
+
   return Contact;
 };
