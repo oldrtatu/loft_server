@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
             unique : true,
         },
         textField : {
-            type : DataTypes.BOOLEAN,
+            type : DataTypes.ENUM(['REQUIRED', 'NOT REQUIRED']),
             allowNull : false,
         },
         associationWith : {
-            type : DataTypes.ENUM(['CUSTOMERS', 'LOCATION', 'CARRIERS', 'VENDORS']),
+            type : DataTypes.ENUM(['CUSTOMER', 'LOCATION', 'CARRIERS', 'VENDORS']),
             allowNull : false
         },
         status : {

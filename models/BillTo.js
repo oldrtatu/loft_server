@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  let BillTo = sequelize.define("billto", {
+  let BillTo = sequelize.define("billTo", {
     id: {
       type: DataTypes.INTEGER(11),
       primaryKey: true,

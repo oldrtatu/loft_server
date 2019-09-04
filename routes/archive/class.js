@@ -24,6 +24,7 @@ router.post('/', async (req, res, next) => {
         status: req.body.status,
         colorCode : req.body.colorCode
     }).catch(err => {
+        console.log(err)
         let response = Error.SequelizeErrorFormat(err)
         res.status(400).send(response)
         res.end()

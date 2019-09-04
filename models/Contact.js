@@ -47,7 +47,9 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Contact.associate = model => {
-    Contact.belongsTo(model.customer);
+    Contact.belongsTo(model.customer, {
+      OnDelete: "CASCADE"
+    });
   };
 
   return Contact;

@@ -20,7 +20,7 @@ const model = require("../models/");
 const server = http.createServer(app);
 
 model.sequelize
-  .sync({ force: true })
+  .sync()
   .then(function() {
     server.listen(PORT, () => console.log("Server Started at port", PORT));
   })

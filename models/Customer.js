@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "CASCADE"
     });
 
-    Customer.hasOne(model.billto, {
+    Customer.hasOne(model.billTo, {
       onDelete: "CASCADE"
     });
 
