@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false
         },
         colorCode : {
-            type : DataTypes.ENUM(["#123123", "#098890"]),
+            type : DataTypes.STRING,
             allowNull : true,
         }
 
