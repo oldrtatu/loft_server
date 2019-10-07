@@ -23,25 +23,33 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Customer.associate = model => {
+    // 1:1 with address
     Customer.hasOne(model.address, {
       onDelete: "CASCADE"
     });
 
+    // 1:n with contacts
     Customer.hasMany(model.contact, {
-      onDelete: "CASCADE"
+      onDelete: "CASCADE",
+      foreignKey: {
+        allowNull: false
+      }
     });
 
+    // 1:1 with billTo
     Customer.hasOne(model.billTo, {
       onDelete: "CASCADE"
     });
 
+    // 1:1 with notification
     Customer.hasOne(model.notification, {
       onDelete: "CASCADE"
     });
 
-    Customer.hasOne(model.notes, {
+    // 1:n with notes
+    Customer.hasMany(model.notes, {
       onDelete: "CASCADE"
-    });
+    })
   };
 
   return Customer;

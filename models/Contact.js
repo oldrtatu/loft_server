@@ -40,15 +40,30 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM(["ACTIVE", "INACTIVE"]),
       allowNull: false
     },
-    workingHour: {
-      type: DataTypes.BLOB,
-      allowNull: true
+    workingHours: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      get() {
+        let data = this.getDataValue("workingHours");
+        if(data) {
+          return JSON.parse(data);
+        }
+      },
+
+      set(value) {
+        if(value) {
+          this.setDataValue("workingHours", JSON.stringify(value));
+        }
+      }
     }
   });
 
   Contact.associate = model => {
     Contact.belongsTo(model.customer, {
-      OnDelete: "CASCADE"
+      onDelete: "CASCADE",
+      foreignKey: {
+        allowNull: false
+      }
     });
   };
 

@@ -21,8 +21,17 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false
         },
         workingHours : {
-            type : DataTypes.BLOB,
-            allowNull : true
+            type : DataTypes.TEXT,
+            allowNull : true,
+            get(){
+                let data = this.getDataValue("workingHours");
+                return JSON.parse(data);
+            },
+
+            set(value){
+                console.log("yola habibi", value)
+                this.setDataValue("workingHours", JSON.stringify(value))
+            }
         }
     })
 

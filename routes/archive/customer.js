@@ -11,7 +11,18 @@ router.get("/", async (req, res, next) => {
     .findAll({
       include: [
         {
-          model: model.billTo
+          model: model.billTo,
+          include: [
+            {
+              model: model.location,
+              attributes: ["name"],
+              include: [
+                {
+                  model: model.address
+                }
+              ]
+            }
+          ]
         },
         {
           model: model.notification
@@ -72,7 +83,7 @@ router.put("/", async (req, res, next) => {
     .update(req.body, {
       where: {
         id: req.body.id
-      }
+      },
     })
     .catch(err => {
       let response = Error.SequelizeErrorFormat(err);

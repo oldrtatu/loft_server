@@ -9,7 +9,11 @@ const Error = require('../../utils/Error')
 // get all drivers
 router.get('/', async (req, res, next) => {
     let queryResult = await model.driver.findAll({
-        include : model.address
+        include : [
+            {
+                model : model.address
+            }
+        ]
     }).catch(err => {
         let response = Error.SequelizeErrorFormat(err)
         console.log(response)
@@ -71,7 +75,6 @@ router.put('/', async (req, res, next) => {
 
     // if driver !== undefined
     if(driver) {
-
         if(driver.address === null) {
             address = await driver.createAddress(req.body.address).catch(err => {
                 let response = Error.SequelizeErrorFormat(err)

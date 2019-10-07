@@ -7,6 +7,8 @@ const logger = require('./logger/logger')
 // import routes
 const archive = require('./routes/archive/')
 const root = require('./routes/')
+// const attachment = require('./routes/attachment.js')
+const attachment = require('./routes/attachment.js')
 
 app.use(morgan('dev'))
 
@@ -27,18 +29,21 @@ app.use((req, res, next) => {
     next()
 })
 
+global.__basedir = __dirname;
+
 
 /**
  * @routes implementation
  * 1. root Route
  * 2. archive Route
- *
+ * 3. Attachment Route
  *
  */
 
 
 app.use('/', root)
 app.use('/archive', archive)
+app.use('/attachment', attachment)
 
 // on ubuntu
 // exports the app

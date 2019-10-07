@@ -50,5 +50,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   });
+
+  BillTo.associate = model => {
+    BillTo.hasOne(model.location)
+  }
   return BillTo;
 };

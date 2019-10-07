@@ -23,6 +23,9 @@ const Error = {
 
         let ErrorObject = this.formatError(err)
 
+        console.log(ErrorObject)
+
+
         // set the code of the error
         if(ErrorObject.original) {
             error['code'] = ErrorObject.original.code

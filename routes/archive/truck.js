@@ -39,10 +39,13 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
 
     // now add truck
+
+    console.log(req.body)
     let truck = await model.truck.create( req.body, {
         include : [model.truckRegistration]
     } ).catch(err => {
         let response = Error.SequelizeErrorFormat(err)
+        console.log(response)
         res.status(400).send(response)
         res.end()
     })

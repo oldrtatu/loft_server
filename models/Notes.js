@@ -7,8 +7,12 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       allowNull: false
     },
-    data: {
-      type: DataTypes.BLOB,
+    message: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    attachmentUrl: {
+      type: DataTypes.STRING,
       allowNull: true
     }
   });

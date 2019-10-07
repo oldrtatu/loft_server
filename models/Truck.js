@@ -19,6 +19,18 @@ module.exports = (sequelize, DataTypes) => {
         status : {
             type : DataTypes.ENUM(["ACTIVE", "INACTIVE"]),
             allowNull : false
+        },
+        notes: {
+            type: DataTypes.BLOB,
+            allowNull : true,
+            get(){
+                let data = this.getDataValue("notes");
+                return JSON.parse(data);
+            },
+
+            set(value){
+                this.setDataValue("notes", JSON.stringify(value))
+            }
         }
 
     })

@@ -11,9 +11,7 @@ router.get("/", async (req, res, next) => {
     .findAll({
       include: [
         {
-          model: model.customer,
-          as: "customer",
-          attributes: ["id", "name"]
+          model: model.customer
         }
       ],
       attributes: {
