@@ -1,9 +1,17 @@
-const express = require('express')
-const router = express.Router()
+const controller = require('../controller/user');
 
-router.get('/', (req, res, next) => {
-    res.status(400).send("you are at https://localhost:8000/")
-})
+module.exports = (router) => {
+    router.route('/users')
+        .post(controller.add)
+        .put(controller.update)
+        .get(controller.get)
+        .delete(controller.delete)
 
+    router.route('/login')
+        .post(controller.login)
 
-module.exports = router
+    router.route('/changePassword')
+        .post(controller.changePassword)
+
+    return router
+}

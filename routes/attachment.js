@@ -30,7 +30,11 @@ router.post("/", upload.single("file"), async (req, res, next) => {
 	});
 });
 
+
+
+
 router.get("/:fileName", async (req, res, next) => {
+
   // file path
   let filePath = __basedir + "/uploads" + req.url;
   fs.readFile(filePath, function(err, data) {
@@ -46,6 +50,8 @@ router.get("/:fileName", async (req, res, next) => {
     res.writeHead(200);
     res.end(data);
   });
+
+
 });
 
 module.exports = router;
