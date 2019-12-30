@@ -1,5 +1,5 @@
 const model = require('../models')
-const Error = require('../utils/Error')
+const STATUS = require('../utils/resTransformer')
 
 module.exports = {
     get: async (req, res) => {
@@ -25,47 +25,35 @@ module.exports = {
                 ]
             }
         }).catch(err => {
-            let response = Error.SequelizeErrorFormat(err)
-            res.status(400).send(response)
+            STATUS.DB_ERROR(res, err)
         })
-        res.status(200).json(issues)
+
+        STATUS.ADDED(res, issues);
     },
+
     add: async (req, res) => {
         let issue = await model.issue.create(req.body).catch(err => {
-            let response = Error.SequelizeErrorFormat(err)
-            res.status(400).send(response)
-            res.end();
+            STATUS.DB_ERROR(res, err)
         })
 
         if (issue) {
-            res.status(200).json({
-                code: "ADD_SUCC",
-                response: issue
-            })
+            STATUS.ADDED(res, issue)
         }
     },
+
     remove: async (req, res) => {
         let issue = await model.issue.destroy({
-            where : {
-                id : req.body.id
+            where: {
+                id: req.body.id
             }
         }).catch(err => {
-            let response = Error.SequelizeErrorFormat(err);
-            res.status(400).send(response)
+            STATUS.DB_ERROR(res, err)
         })
 
-        if(issue == 1) {
-            res.status(200).json({
-                code : "DELETE_SUCC",
-                response : {
-                    id : req.body.id
-                }
-            })
+        if (issue == 1) {
+            STATUS.REMOVED(res, req.body.id)
         } else {
-            res.status(200).json( {
-                code : "DELETE_FAIL",
-                message : "Id doesn't exist"
-            })
+            STATUS.NOT_FOUND(res)
         }
     },
     update: async (req, res) => {
@@ -74,21 +62,13 @@ module.exports = {
                 id: req.body.id
             }
         }).catch(err => {
-            let response = Error.SequelizeErrorFormat(err)
-            res.status(400).send(response)
-            res.end()
+            STATUS.DB_ERROR(res, err)
         })
 
         if (issue[0] == 1) {
-            res.status(200).json({
-                code: "UPDATE_SUCC",
-                response: req.body
-            })
+            STATUS.UPDATED(res, req.body)
         } else {
-            res.status(200).json({
-                code: "UPDATE_FAIL",
-                message: "ID doesn't exist"
-            })
+            STATUS.NOT_FOUND(res)
         }
     },
 }
