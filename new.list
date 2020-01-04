@@ -1,0 +1,3 @@
+GET https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail
+"x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
+"x-rapidapi-key": "EPZctGbrNGmshU0FTP2CjRRwUqhgp1P2ZI9jsnMp3lHWCN7ytD"

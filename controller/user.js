@@ -102,6 +102,7 @@ module.exports = {
         }
     },
     login: async (req, res) => {
+        console.log(req.body)
         let user = await model.user.findOne({ where: { email: req.body.email } })
 
         /**

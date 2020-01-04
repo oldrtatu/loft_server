@@ -51,6 +51,7 @@ describe('GET Payment Term', () => {
 
 })
 
+
 // Test the /POST Route
 
 describe('POST Payment Term', () => {

@@ -11,6 +11,10 @@ const should = chai.should();
 const model = require('../models/index')
 
 
+
+model.sequelize.sync({force : true})
+
+
 // test the class route
 
 chai.use(chaiHttp)
@@ -40,6 +44,7 @@ describe('GET class', () => {
     it("it should get all the list of classes", (done) => {
         chai.request(server)
         .get('/archive/class')
+        .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoicm9oaXQudGF0dTg5NkBnbWFpbC5jb20iLCJpYXQiOjE1Nzc2MjU5NzcsImV4cCI6MTU4MDIxNzk3NywiaXNzIjoiaHR0cDovL3hwbGljaXRzb2Z0d2FyZS5jbyJ9.fbYHa9LiZ76KJpMyWOEQRxEM78wCPGNOeHQ3xr0T6m8')
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('array');
@@ -50,6 +55,7 @@ describe('GET class', () => {
 
 
 })
+
 
 // Test the /POST Route
 

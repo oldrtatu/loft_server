@@ -1,48 +1,44 @@
 // import modules
-const express = require("express")
-const morgan =require("morgan")
-const bodyParser = require("body-parser")
+const express = require("express");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
 
 // import custom modules
-const logger = require('./logger/logger')
-const validateToken = require('./utils').validateToken
-
+const logger = require("./logger/logger");
+const validateToken = require("./utils").validateToken;
+const schedule = require("./jobs/schedule");
 // implement app
-const app = express()
-const router = express.Router()
+const app = express();
+const router = express.Router();
 
 // import routes
-const archive = require('./routes/archive/')
-const root = require('./routes/')
-const attachment = require('./routes/attachment.js')
-const login = require('./routes/login')
-const po = require('./routes/po')
-
+const archive = require("./routes/archive/");
+const root = require("./routes/");
+const attachment = require("./routes/attachment.js");
+const login = require("./routes/login");
+const po = require("./routes/po");
 
 // middleware
-app.use(morgan('dev'))
-app.use(bodyParser.urlencoded({extended:false}))
-app.use(bodyParser.json())
-
-
-
+app.use(morgan("dev"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // cors enabled
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
 
-    if(req.method === "OPTIONS") {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET')
-    }
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+  }
 
-    next()
-})
+  next();
+});
 
 global.__basedir = __dirname;
-
-
 
 /**
  * @routes implementation
@@ -52,22 +48,25 @@ global.__basedir = __dirname;
  *
  */
 
+// jobs
+schedule.start();
+
 // login route without validation
 
-app.use('/login', login(router))
+app.use("/login", login(router));
 
 // validate Users
-app.use('/', validateToken)
+app.use("/", validateToken);
 
-app.use('/', root(router))
+app.use("/", root(router));
 
 // purchase order
-app.use('/po', po(router))
+app.use("/po", po(router));
 
 // archive route
-app.use('/archive', archive)
+app.use("/archive", archive);
 
 // file upload route
-app.use('/attachment', attachment)
+app.use("/attachment", attachment);
 
-module.exports = app
+module.exports = app;
