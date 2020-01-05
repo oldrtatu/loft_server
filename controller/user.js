@@ -120,7 +120,7 @@ module.exports = {
     if (!user.validPassword(req.body.password)) {
       res.status(403).json({
         code: "FORBIDDEN",
-        message: "User is not authenticate."
+        message: "Password is incorrect"
       });
 
       res.end();
