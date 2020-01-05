@@ -127,9 +127,11 @@ module.exports = {
     } else {
       let token = Token.generateToken({ user: user.email });
       res.status(200).json({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
+        user: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email
+        },
         code: "LOGGED_IN",
         message: "You are successfully logged in!!!",
         token: token
