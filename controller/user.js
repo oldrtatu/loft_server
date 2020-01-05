@@ -123,15 +123,14 @@ module.exports = {
         message: "User is not authenticate."
       });
       res.end();
+    } else {
+      let token = Token.generateToken({ user: user.email });
+      res.status(200).json({
+        code: "LOGGED_IN",
+        message: "You are successfully logged in!!!",
+        token: token
+      });
     }
-
-    let token = Token.generateToken({ user: user.email });
-
-    res.status(200).json({
-      code: "LOGGED_IN",
-      message: "You are successfully logged in!!!",
-      token: token
-    });
   },
 
   changePassword: async (req, res) => {
