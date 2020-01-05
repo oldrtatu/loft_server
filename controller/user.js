@@ -122,6 +122,7 @@ module.exports = {
         code: "FORBIDDEN",
         message: "User is not authenticate."
       });
+      res.end();
     }
 
     let token = Token.generateToken({ user: user.email });
