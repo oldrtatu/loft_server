@@ -95,7 +95,8 @@ module.exports = {
         STATUS.DB_ERROR(res, err); // send Database Error
       });
 
-    if (queryResult === 1) STATUS.REMOVED(res, req.body.id); // send deleted address
+    if (queryResult === 1) STATUS.REMOVED(res, req.body.id);
+    // send deleted address
     else STATUS.NOT_FOUND(res); // not found
   }
 };

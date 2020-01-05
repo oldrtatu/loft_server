@@ -64,6 +64,7 @@ module.exports = {
     if (issue == 1) STATUS.REMOVED(res, req.body.id);
     else STATUS.NOT_FOUND(res);
   },
+
   update: async (req, res) => {
     let issue = await model.issue
       .update(req.body, {
