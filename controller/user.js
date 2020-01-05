@@ -118,11 +118,10 @@ module.exports = {
     }
 
     if (!user.validPassword(req.body.password)) {
-      res.status(403).json({
+      res.status(200).json({
         code: "FORBIDDEN",
         message: "User is not authenticate."
       });
-      res.end();
     } else {
       let token = Token.generateToken({ user: user.email });
       res.status(200).json({
