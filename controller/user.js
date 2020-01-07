@@ -130,7 +130,9 @@ module.exports = {
         user: {
           firstName: user.firstName,
           lastName: user.lastName,
-          email: user.email
+          email: user.email,
+          dashboardConfig: user.dashboardConfig,
+          profile: user.profile
         },
         code: "LOGGED_IN",
         message: "You are successfully logged in!!!",
