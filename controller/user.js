@@ -161,7 +161,7 @@ module.exports = {
       let token = Token.generateToken({ user: ChangedUser.email });
       res.status(200).json({
         code: "UPDATE_SUCC",
-        toke: token,
+        token: token,
         response: "Password is changed"
       });
     } else {
