@@ -68,6 +68,6 @@ app.use("/po", po(router));
 app.use("/archive", archive);
 
 // file upload route
-app.use("/attachment", attachment);
+app.use("/uploads", attachment);
 
 module.exports = app;

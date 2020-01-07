@@ -3,7 +3,7 @@ const router = express.Router();
 const fs = require("fs");
 const multer = require("multer");
 const appRoot = require("app-root-path");
-const model = require('./../models/')
+// const model = require('./../models/')
 
 const uploadPath = appRoot + "/uploads/";
 
@@ -24,17 +24,13 @@ router.get("/", async (req, res, next) => {
 });
 
 // upload a file
-router.post("/", upload.single("file"), async (req, res, next) => {	
+router.post("/", upload.single("file"), async (req, res, next) => {
   res.status(200).json({
-		url: '/attachment/' + req.file.filename
-	});
+    url: "/uploads/" + req.file.filename
+  });
 });
 
-
-
-
 router.get("/:fileName", async (req, res, next) => {
-
   // file path
   let filePath = __basedir + "/uploads" + req.url;
   fs.readFile(filePath, function(err, data) {
@@ -50,8 +46,6 @@ router.get("/:fileName", async (req, res, next) => {
     res.writeHead(200);
     res.end(data);
   });
-
-
 });
 
 module.exports = router;
