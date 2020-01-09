@@ -25,7 +25,8 @@ router.get("/", async (req, res, next) => {
 
 // upload a file
 router.post("/", upload.single("file"), async (req, res, next) => {
-  res.status(200).json({
+	res.status(200).json({
+		code : "UPLOAD_SUCC",
     url: "/uploads/" + req.file.filename
   });
 });

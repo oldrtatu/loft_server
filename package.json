@@ -10,6 +10,7 @@
     "test": "mocha --timeout 10000",
     "create_user": "cross-env NODE_ENV=development node ./scripts/create_user.js"
   },
+  "exec_mode" : "cluster",
   "dependencies": {
     "app-root-path": "^2.2.1",
     "bcrypt": "^3.0.7",

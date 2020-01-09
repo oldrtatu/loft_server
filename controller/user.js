@@ -32,7 +32,7 @@ module.exports = {
   },
 
   update: async (req, res) => {
-    let data = Filter.onUpdate(req, body);
+    let data = Filter.onUpdate(req.body);
 
     if (!data) {
       res.status(400).json({
@@ -47,7 +47,7 @@ module.exports = {
     let user = await model.user
       .update(update_data, {
         where: {
-          id
+           uid : id
         }
       })
       .catch(err => {
@@ -132,7 +132,9 @@ module.exports = {
           lastName: user.lastName,
           email: user.email,
           dashboardConfig: user.dashboardConfig,
-          profile: user.profile
+          profile: user.profile,
+		id : user.id,
+		uid : user.uid
         },
         code: "LOGGED_IN",
         message: "You are successfully logged in!!!",
