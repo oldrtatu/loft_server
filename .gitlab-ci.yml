@@ -12,9 +12,6 @@ install_dependencies:
   stage: build
   script:
     - yarn install
-  artifacts:
-    path:
-      - node_modules/
 
 testing_test:
   stage: test
