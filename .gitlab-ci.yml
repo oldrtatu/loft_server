@@ -1,8 +1,5 @@
 image: node:latest
 
-services:
-  - mysql:latest
-
 variables:
   MYSQL_DATABASE: "loft_server"
   MYSQL_ROOT_PASSWORD: "THEviper22"
