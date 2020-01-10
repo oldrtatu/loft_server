@@ -13,6 +13,6 @@ install_dependencies:
   script:
     - yarn install
 
-testing_test:
+testing:
   stage: test
   script: yarn test
