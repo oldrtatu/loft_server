@@ -3,6 +3,7 @@ image: node:latest
 stages:
   - build
   - test
+  - prod
 
 cache:
   paths:
