@@ -2,7 +2,6 @@ image: node:latest
 
 stages:
   - build
-  - test
   - prod
 
 cache:
@@ -13,10 +12,6 @@ install_dependencies:
   stage: build
   script:
     - yarn install
-
-testing:
-  stage: test
-  script: yarn test
 
 production:
   stage: prod
