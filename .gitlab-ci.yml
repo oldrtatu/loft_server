@@ -1,7 +1,15 @@
 image: node:latest
 
+services:
+  - mysql:latest
+
+variables:
+  MYSQL_DATABASE: "loft_server"
+  MYSQL_ROOT_PASSWORD: "THEviper22"
+
 stages:
   - build
+  - test
   - prod
 
 cache:
@@ -12,6 +20,10 @@ install_dependencies:
   stage: build
   script:
     - yarn install
+
+testing:
+  stage: test
+  script: yarn test
 
 production:
   stage: prod
