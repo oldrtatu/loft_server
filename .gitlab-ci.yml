@@ -16,3 +16,7 @@ install_dependencies:
 testing:
   stage: test
   script: yarn test
+
+production:
+  stage: prod
+  script: pm2 start ecosystem.config.js
