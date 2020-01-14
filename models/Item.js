@@ -32,16 +32,6 @@ module.exports = (sequelize, DataTypes) => {
       unique: false,
       allowNull: true
     },
-    initialQuantity: {
-      type: DataTypes.INTEGER,
-      unique: false,
-      allowNull: false
-    },
-    reorderAt: {
-      type: DataTypes.INTEGER,
-      unique: false,
-      allowNull: true
-    },
     quantityUnit: {
       type: DataTypes.ENUM([
         "LBS",

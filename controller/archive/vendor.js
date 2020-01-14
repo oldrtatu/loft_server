@@ -15,8 +15,7 @@ module.exports = {
                 "customerId",
                 "driverId",
                 "locationId",
-                "subsidiaryId",
-                "vendorId"
+                "subsidiaryId"
               ]
             }
           }

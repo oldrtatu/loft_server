@@ -41,20 +41,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     workingHours: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-      get() {
-        let data = this.getDataValue("workingHours");
-        if(data) {
-          return JSON.parse(data);
-        }
-      },
-
-      set(value) {
-        if(value) {
-          this.setDataValue("workingHours", JSON.stringify(value));
-        }
-      }
+      type: DataTypes.JSON,
+      allowNull: true
     }
   });
 

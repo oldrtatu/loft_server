@@ -1,6 +1,9 @@
+const model = require("../models");
+
 module.exports = {
   get: (req, res) => {
-    return;
+    console.log("123", { ...model.PO });
+    res.send("yola");
   },
 
   add: (req, res) => {

@@ -4,10 +4,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM("NONE", "TRUCK", "TRAILER"),
       allowNull: true
     },
-    createdBy: {
-      type: DataTypes.STRING(50),
-      allowNull: false
-    },
     assignedTo: {
       type: DataTypes.STRING(50),
       allowNull: false
@@ -16,17 +12,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(50),
       allowNull: false
     },
-    type: {
-      type: DataTypes.STRING(10),
-      allowNull: true
-    },
     poType: {
       type: DataTypes.ENUM("GENERAL", "INVENTORY", "ISSUES"),
       allowNull: false
-    },
-    vendorNotes: {
-      type: DataTypes.STRING,
-      allowNull: true
     },
     reportingTime: {
       type: DataTypes.TIME,
@@ -45,6 +33,8 @@ module.exports = (sequelize, DataTypes) => {
       as: "division"
     });
     PO.belongsTo(models.truck);
+    PO.belongsTo(models.user, { as: "createdBy" });
+    PO.hasMany(models.issue);
   };
 
   return PO;

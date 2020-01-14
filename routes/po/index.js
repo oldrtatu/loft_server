@@ -1,10 +1,13 @@
-const issue = require('./issue')
-const po = require('./po')
+const issue = require("./issue");
+const po = require("./po");
+const inventory = require("./inventory");
 
-module.exports = (router) => {
-    issue(router)
-    
-    po(router)
+module.exports = router => {
+  issue(router);
 
-    return router
-}
+  po(router);
+
+  inventory(router);
+
+  return router;
+};

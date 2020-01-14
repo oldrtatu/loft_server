@@ -80,6 +80,7 @@ module.exports = (sequelize, DataTypes) => {
     Issue.belongsTo(models.class, { as: "category" });
     Issue.belongsTo(models.subsidiary, { as: "division" });
     Issue.belongsTo(models.truck);
+    Issue.belongsTo(models.PO);
   };
 
   return Issue;

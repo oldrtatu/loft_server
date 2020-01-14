@@ -13,8 +13,8 @@ const location = require("./location");
 const terminal = require("./terminal");
 const contact = require("./contact");
 const customer = require("./customer");
-const vendor = require('./vendor')
-
+const vendor = require("./vendor");
+const item = require("./item");
 
 router.get("/", (req, res, next) => {
   res.status(400).json({ message: "yay" });
@@ -33,6 +33,7 @@ router.use("/contact", contact);
 router.use("/customer", customer);
 
 // router for new controllers
-vendor(router)
+vendor(router);
+item(router);
 
 module.exports = router;

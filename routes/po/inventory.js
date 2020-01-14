@@ -1,8 +1,8 @@
-const controller = require("../../controller/po");
+const controller = require("../../controller/inventory");
 
 module.exports = router => {
   router
-    .route("/po")
+    .route("/inventory")
     .get(controller.get)
     .post(controller.add)
     .put(controller.update)
