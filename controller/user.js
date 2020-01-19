@@ -47,7 +47,7 @@ module.exports = {
     let user = await model.user
       .update(update_data, {
         where: {
-           uid : id
+          uid: id
         }
       })
       .catch(err => {
@@ -101,13 +101,15 @@ module.exports = {
     }
   },
   login: async (req, res) => {
-    console.log(req.body);
-    let user = await model.user.findOne({ where: { email: req.body.email } });
-
-    /**
-     *  TODO Generate JW Token
-     */
-
+    let user = await model.user.findOne({
+      where: { email: req.body.email },
+      include: [
+        {
+          model: model.todo,
+          include: model.task
+        }
+      ]
+    });
     if (!user) {
       res.status(404).json({
         code: "USER_NOT_FOUND",
@@ -133,8 +135,9 @@ module.exports = {
           email: user.email,
           dashboardConfig: user.dashboardConfig,
           profile: user.profile,
-		id : user.id,
-		uid : user.uid
+          id: user.id,
+          uid: user.uid,
+          todos: user.todos
         },
         code: "LOGGED_IN",
         message: "You are successfully logged in!!!",

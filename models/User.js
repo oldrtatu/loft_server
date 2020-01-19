@@ -76,5 +76,9 @@ module.exports = (sequelize, DataTypes) => {
     return bcrypt.compareSync(password, this.password);
   };
 
+  User.associate = model => {
+    User.hasMany(model.todo);
+  };
+
   return User;
 };
