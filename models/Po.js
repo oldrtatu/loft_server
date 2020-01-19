@@ -34,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     PO.belongsTo(models.user, { as: "createdBy" });
     PO.hasMany(models.issue);
+    PO.belongsTo(models.truck);
   };
 
   return PO;

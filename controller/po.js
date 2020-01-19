@@ -23,6 +23,10 @@ module.exports = {
         },
         {
           model: model.issue
+        },
+        {
+          model: model.truck,
+          attributes: ["id", "unitNo"]
         }
       ],
       attributes: {
