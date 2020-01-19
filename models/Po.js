@@ -23,6 +23,14 @@ module.exports = (sequelize, DataTypes) => {
     status: {
       type: DataTypes.ENUM("ACTIVE", "COMPLETE", "INVOICED", "ENTERED IN QB"),
       allowNull: false
+    },
+    poNotes: {
+      type: DataTypes.STRING(2000),
+      allowNull: true
+    },
+    attachments: {
+      type: DataTypes.STRING(2000),
+      allowNull: true
     }
   });
 
