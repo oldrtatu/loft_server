@@ -48,7 +48,7 @@ module.exports = {
     let po;
     try {
       po = await model.PO.create(req.body);
-      if (req.body.issues && req.body.poType == "ISSUE") {
+      if (req.body.issues && req.body.poType == "ISSUES") {
         let issue = await BULK.bulkUpdate(
           req.body.issues,
           "issue",
