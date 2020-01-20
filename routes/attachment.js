@@ -25,15 +25,15 @@ router.get("/", async (req, res, next) => {
 
 // upload a file
 router.post("/", upload.single("file"), async (req, res, next) => {
-	res.status(200).json({
-		code : "UPLOAD_SUCC",
+  res.status(200).json({
+    code: "UPLOAD_SUCC",
     url: "/uploads/" + req.file.filename
   });
 });
 
 router.get("/:fileName", async (req, res, next) => {
   // file path
-  let filePath = __basedir + "/uploads" + req.url;
+  let filePath = __basedir + "/uploads/" + req.params.fileName;
   fs.readFile(filePath, function(err, data) {
     if (err) {
       res.writeHead(404);
