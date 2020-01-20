@@ -9,7 +9,7 @@ module.exports = {
         if (d.status != "OPEN") {
           d = { ...obj, POId };
         } else {
-          d = { ...obj };
+          d = { ...obj, POId: null };
         }
         updates.push(
           model[modelName].update(
