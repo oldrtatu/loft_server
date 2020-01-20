@@ -5,7 +5,12 @@ module.exports = {
     return new Promise((resolve, reject) => {
       let updates = [];
       for (let obj of data) {
-        let d = { ...obj, POId };
+        let d;
+        if (d.status != "OPEN") {
+          d = { ...obj, POId };
+        } else {
+          d = { ...obj };
+        }
         updates.push(
           model[modelName].update(
             d,
