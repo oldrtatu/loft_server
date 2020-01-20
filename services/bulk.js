@@ -6,7 +6,7 @@ module.exports = {
       let updates = [];
       for (let obj of data) {
         let d;
-        if (d.status != "OPEN") {
+        if (obj.status != "OPEN") {
           d = { ...obj, POId };
         } else {
           d = { ...obj, POId: null };
