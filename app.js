@@ -34,9 +34,10 @@ app.use((req, res, next) => {
 
   if (req.method === "OPTIONS") {
     res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+    res.sendStatus(200);
+  } else {
+    next();
   }
-
-  next();
 });
 
 global.__basedir = __dirname;

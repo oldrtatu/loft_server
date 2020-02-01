@@ -1,7 +1,7 @@
 const model = require("../models");
 
 module.exports = {
-  bulkUpdate: (data, modelName, transaction, POId) => {
+  bulkUpdate: async (data, modelName, transaction, POId) => {
     return new Promise((resolve, reject) => {
       let updates = [];
 	    console.log(data)
