@@ -4,6 +4,7 @@ module.exports = {
   bulkUpdate: (data, modelName, transaction, POId) => {
     return new Promise((resolve, reject) => {
       let updates = [];
+	    console.log(data)
       for (let obj of data) {
         let d;
         if (obj.status != "OPEN") {
@@ -11,6 +12,7 @@ module.exports = {
         } else {
           d = { ...obj, POId: null };
         }
+	console.log(d)
         updates.push(
           model[modelName].update(
             d,

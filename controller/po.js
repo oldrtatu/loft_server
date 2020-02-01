@@ -95,10 +95,12 @@ module.exports = {
         let issue = await BULK.bulkUpdate(
           req.body.issues,
           "issue",
-          transaction
+          transaction,
+	req.body.id
         );
       }
     } catch (err) {
+	    console.log(err);
       STATUS.DB_ERROR(res, err);
     }
 
