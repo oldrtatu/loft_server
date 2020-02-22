@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  let TruckRegistration = sequelize.define("truckRegistration", {
+  let TrailerRegistration = sequelize.define("trailerRegistration", {
     id: {
       type: DataTypes.INTEGER(11),
       primaryKey: true,
@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       allowNull: false
     },
-
     vinNo: {
       type: DataTypes.STRING,
       unique: true,
@@ -33,10 +32,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
-    ifta: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
     vehicleWeight: {
       type: DataTypes.STRING,
       allowNull: true
@@ -45,15 +40,23 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM(["KG", "POUND"]),
       allowNull: false
     },
-    regGrossWeight: {
+    noOfAxles: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    regGrossWeightUnit: {
-      type: DataTypes.ENUM(["KG", "POUND"]),
-      allowNull: false
+    reeferMake: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    reeferModel: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    state_province: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   });
 
-  return TruckRegistration;
+  return TrailerRegistration;
 };

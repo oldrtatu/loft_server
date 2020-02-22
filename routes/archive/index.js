@@ -15,6 +15,7 @@ const contact = require("./contact");
 const customer = require("./customer");
 const vendor = require("./vendor");
 const item = require("./item");
+const trailer = require("./trailer");
 
 router.get("/", (req, res, next) => {
   res.status(400).json({ message: "yay" });
@@ -31,6 +32,7 @@ router.use("/location", location);
 router.use("/terminal", terminal);
 router.use("/contact", contact);
 router.use("/customer", customer);
+router.use("/trailer", trailer);
 
 // router for new controllers
 vendor(router);
