@@ -11,7 +11,10 @@ module.exports = {
             as: "category",
             attributes: ["id", "name"]
           }
-        ]
+        ],
+        attributes: {
+          exclude: ["categoryId", "createdAt", "updatedAt"]
+        }
       })
       .catch(err => {
         STATUS.DB_ERROR(res, err); // send DB_ERROR
