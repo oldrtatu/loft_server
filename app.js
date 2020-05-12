@@ -17,6 +17,7 @@ const root = require("./routes/");
 const attachment = require("./routes/attachment.js");
 const login = require("./routes/login");
 const po = require("./routes/po");
+const maintenance = require("./routes/maintenance");
 
 // middleware
 
@@ -64,6 +65,10 @@ app.use("/", root(router));
 
 // purchase order
 app.use("/po", po(router));
+
+// maintenance
+
+app.use("/maintenance", maintenance(router));
 
 // archive route
 app.use("/archive", archive);
