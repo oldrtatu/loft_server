@@ -13,6 +13,7 @@ const location = require("./location");
 const terminal = require("./terminal");
 const contact = require("./contact");
 const customer = require("./customer");
+const billTo = require("./billTo");
 const vendor = require("./vendor");
 const item = require("./item");
 const trailer = require("./trailer");
@@ -33,6 +34,7 @@ router.use("/terminal", terminal);
 router.use("/contact", contact);
 router.use("/customer", customer);
 router.use("/trailer", trailer);
+router.use("/billing", billTo);
 
 // router for new controllers
 vendor(router);

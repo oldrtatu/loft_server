@@ -7,23 +7,23 @@ const Error = require("../../utils/Error");
 
 // create a contact
 router.post("/", async (req, res, next) => {
-  let contact = await model.contact.create(req.body).catch((err) => {
+  let billTo = await model.billTo.create(req.body).catch((err) => {
     let response = Error.SequelizeErrorFormat(err);
     res.status(400).send(response);
     res.end();
   });
 
-  if (contact) {
+  if (billTo) {
     res.status(201).json({
       code: "ADD_SUCC",
-      response: contact,
+      response: billTo,
     });
   }
 });
 
 // update a contact
 router.put("/", async (req, res, next) => {
-  let contact = await model.contact
+  let billTo = await model.billTo
     .update(req.body, {
       where: {
         id: req.body.id,
@@ -34,7 +34,7 @@ router.put("/", async (req, res, next) => {
       res.status(400).send(response);
     });
 
-  if (contact[0] === 1) {
+  if (billTo[0] === 1) {
     res.status(200).json({
       code: "UPDATE_SUCC",
       response: req.body,
@@ -49,7 +49,7 @@ router.put("/", async (req, res, next) => {
 
 // delete a contact
 router.delete("/", async (req, res, next) => {
-  let contact = await model.contact
+  let billTo = await model.billTo
     .destroy({
       where: { id: req.body.id },
     })
@@ -58,7 +58,7 @@ router.delete("/", async (req, res, next) => {
       res.status(400).send(response);
     });
 
-  if (contact === 1) {
+  if (billTo === 1) {
     res.status(200).json({
       code: "DELETE_SUCC",
       response: {

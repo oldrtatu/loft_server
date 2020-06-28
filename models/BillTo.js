@@ -5,54 +5,58 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
       unique: true,
-      allowNull: false
+      allowNull: false,
     },
     term: {
       type: DataTypes.ENUM(["1 % on 20"]),
-      allowNull: true
+      allowNull: true,
     },
     standardToPrintNotes: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     standardInvoiceInstructions: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     quickPayDiscountType1: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     quickPayDiscountType1Unit: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
 
     quickPayDiscountType2: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     quickPayDiscountType2Unit: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
 
     quickPayDiscountType3: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     quickPayDiscountType3Unit: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     status: {
       type: DataTypes.ENUM(["ACTIVE", "INACTIVE"]),
-      allowNull: false
-    }
+      allowNull: false,
+    },
   });
 
-  BillTo.associate = model => {
-    BillTo.hasOne(model.location)
-  }
+  BillTo.associate = (model) => {
+    BillTo.belongsTo(model.location, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
   return BillTo;
 };

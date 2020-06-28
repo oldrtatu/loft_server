@@ -4,11 +4,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER(11),
       primaryKey: true,
       autoIncrement: true,
-      unique: true
-    }
+      unique: true,
+    },
   });
 
-  Notification.associate = model => {
+  Notification.associate = (model) => {
     Notification.belongsTo(model.contact, { as: "delayInPickup" });
     Notification.belongsTo(model.contact, { as: "delayInDelivery" });
     Notification.belongsTo(model.contact, { as: "orderEntered" });

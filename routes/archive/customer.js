@@ -18,30 +18,30 @@ router.get("/", async (req, res, next) => {
               attributes: ["name"],
               include: [
                 {
-                  model: model.address
-                }
-              ]
-            }
-          ]
+                  model: model.address,
+                },
+              ],
+            },
+          ],
         },
         {
-          model: model.notification
+          model: model.notification,
         },
         {
-          model: model.contact
+          model: model.contact,
         },
         {
-          model: model.notes
+          model: model.notes,
         },
         {
-          model: model.address
-        }
+          model: model.address,
+        },
       ],
       attributes: {
-        exclude: ["createdAt", "updatedAt"]
-      }
+        exclude: ["createdAt", "updatedAt"],
+      },
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       let response = Error.SequelizeErrorFormat(err);
       res.status(400).send(response);
@@ -54,15 +54,9 @@ router.post("/", async (req, res, next) => {
   // now add customer
   let customer = await model.customer
     .create(req.body, {
-      include: [
-        model.billTo,
-        model.notification,
-        model.notes,
-        model.address,
-        model.contact
-      ]
+      include: [model.notification, model.notes, model.address],
     })
-    .catch(err => {
+    .catch((err) => {
       let response = Error.SequelizeErrorFormat(err);
       res.status(400).send(response);
       res.end();
@@ -71,7 +65,7 @@ router.post("/", async (req, res, next) => {
   if (customer) {
     res.status(201).json({
       code: "ADD_SUCC",
-      response: customer
+      response: customer,
     });
   }
 });
@@ -82,95 +76,99 @@ router.put("/", async (req, res, next) => {
   let queryResult = await model.customer
     .update(req.body, {
       where: {
-        id: req.body.id
+        id: req.body.id,
       },
     })
-    .catch(err => {
+    .catch((err) => {
       let response = Error.SequelizeErrorFormat(err);
       res.status(400).send(response);
     });
 
   // update billTo
   let customer =
-    req.body.billTo || req.body.address || req.body.notification
+    req.body.address || req.body.notification
       ? await model.customer
           .findByPk(req.body.id, {
-            include: [model.billTo, model.address, model.notification]
+            include: [model.billTo, model.address, model.notification],
           })
-          .catch(err => {
+          .catch((err) => {
             let response = Error.SequelizeErrorFormat(err);
             res.status(400).send(response);
           })
       : undefined;
 
-  // update billTo
-  if (customer["billTo"] == null) {
-    let result = await customer.createBillTo(req.body.billTo).catch(err => {
-      let response = Error.SequelizeErrorFormat(err);
-      res.status(400).send(response);
-    });
-  } else {
-    let result = await model.billTo
-      .update(req.body.billTo, {
-        where: {
-          id: customer.billTo.id
-        }
-      })
-      .catch(err => {
-        let response = Error.SequelizeErrorFormat(err);
-        res.status(400).send(response);
+  if (!customer) {
+    if (queryResult[0] === 1) {
+      res.status(200).json({
+        code: "UPDATE_SUCC",
       });
+    } else {
+      res.status(200).json({
+        code: "UPDATE_FAIL",
+        message: "ID doesn't exist",
+      });
+    }
+
+    return;
   }
 
   // update notification
-  if (customer["notification"] == null) {
-    let result = await customer
-      .createNotification(req.body.notification)
-      .catch(err => {
-        let response = Error.SequelizeErrorFormat(err);
-        res.status(400).send(response);
-      });
-  } else {
-    let result = await model.notification
-      .update(req.body.notification, {
-        where: {
-          id: customer.notification.id
-        }
-      })
-      .catch(err => {
-        let response = Error.SequelizeErrorFormat(err);
-        res.status(400).send(response);
-      });
+
+  if (req.body.notification) {
+    if (customer["notification"] == null) {
+      let result = await customer
+        .createNotification(req.body.notification)
+        .catch((err) => {
+          let response = Error.SequelizeErrorFormat(err);
+          res.status(400).send(response);
+        });
+    } else {
+      let result = await model.notification
+        .update(req.body.notification, {
+          where: {
+            id: customer.notification.id,
+          },
+        })
+        .catch((err) => {
+          let response = Error.SequelizeErrorFormat(err);
+          res.status(400).send(response);
+        });
+    }
   }
 
   // update address
-  if (customer["address"] == null) {
-    let result = await customer.createAddress(req.body.address).catch(err => {
-      let response = Error.SequelizeErrorFormat(err);
-      res.status(400).send(response);
-    });
-  } else {
-    let result = await model.address
-      .update(req.body.address, {
-        where: {
-          id: customer.address.id
-        }
-      })
-      .catch(err => {
-        let response = Error.SequelizeErrorFormat(err);
-        res.status(400).send(response);
-      });
+
+  if (req.body.address) {
+    if (customer["address"] == null) {
+      let result = await customer
+        .createAddress(req.body.address)
+        .catch((err) => {
+          let response = Error.SequelizeErrorFormat(err);
+          res.status(400).send(response);
+        });
+    } else {
+      let result = await model.address
+        .update(req.body.address, {
+          where: {
+            id: customer.address.id,
+          },
+        })
+        .catch((err) => {
+          let response = Error.SequelizeErrorFormat(err);
+          res.status(400).send(response);
+        });
+    }
   }
 
   // send the response
   if (queryResult[0] === 1) {
     res.status(200).json({
-      code: "UPDATE_SUCC"
+      code: "UPDATE_SUCC",
     });
   } else {
     res.status(200).json({
       code: "UPDATE_FAIL",
-      message: "ID doesn't exist"
+      message: "ID doesn't exist",
     });
   }
 });
@@ -179,9 +177,9 @@ router.put("/", async (req, res, next) => {
 router.delete("/", async (req, res, next) => {
   let queryResult = await model.customer
     .destroy({
-      where: { id: req.body.id }
+      where: { id: req.body.id },
     })
-    .catch(err => {
+    .catch((err) => {
       let response = Error.SequelizeErrorFormat(err);
       res.status(400).send(response);
     });
@@ -190,13 +188,13 @@ router.delete("/", async (req, res, next) => {
     res.status(200).json({
       code: "DELETE_SUCC",
       response: {
-        id: req.body.id
-      }
+        id: req.body.id,
+      },
     });
   } else {
     res.status(200).json({
       code: "DELETE_FAIL",
-      message: "ID doesn't exist"
+      message: "ID doesn't exist",
     });
   }
 });

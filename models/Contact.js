@@ -5,54 +5,56 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
       unique: true,
-      allowNull: false
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false
+      allowNull: false,
     },
     position: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     department: {
       type: DataTypes.ENUM(["TRACKING AND TRACING", "ACCOUNTS", "DISPATCH"]),
-      allowNull: false
+      allowNull: false,
     },
     phone: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     tollfree: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     fax: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     status: {
       type: DataTypes.ENUM(["ACTIVE", "INACTIVE"]),
-      allowNull: false
+      allowNull: false,
     },
     workingHours: {
       type: DataTypes.JSON,
-      allowNull: true
-    }
+      allowNull: true,
+    },
   });
 
-  Contact.associate = model => {
+  Contact.associate = (model) => {
     Contact.belongsTo(model.customer, {
       onDelete: "CASCADE",
       foreignKey: {
-        allowNull: false
-      }
+        allowNull: false,
+      },
     });
+
+    Contact.belongsTo(model.billTo);
   };
 
   return Contact;

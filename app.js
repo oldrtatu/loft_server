@@ -59,7 +59,7 @@ schedule.start();
 app.use("/login", login(router));
 
 // validate Users
-app.use("/", validateToken);
+// app.use("/", validateToken);
 
 app.use("/", root(router));
 
