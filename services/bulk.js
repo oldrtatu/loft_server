@@ -4,7 +4,7 @@ module.exports = {
   bulkUpdate: async (data, modelName, transaction, POId) => {
     return new Promise((resolve, reject) => {
       let updates = [];
-	    console.log(data)
+      console.log(data);
       for (let obj of data) {
         let d;
         if (obj.status != "OPEN") {
@@ -12,12 +12,12 @@ module.exports = {
         } else {
           d = { ...obj, POId: null };
         }
-	console.log(d)
+        console.log(d);
         updates.push(
           model[modelName].update(
             d,
             {
-              where: { id: d.id }
+              where: { id: d.id },
             },
             { transaction }
           )
@@ -25,12 +25,12 @@ module.exports = {
       }
 
       Promise.all(updates)
-        .then(res => {
+        .then((res) => {
           resolve(res);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
-  }
+  },
 };
