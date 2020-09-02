@@ -9,25 +9,25 @@ module.exports = {
         {
           model: model.class,
           as: "category",
-          attributes: ["id", "name"]
+          attributes: ["id", "name"],
         },
         {
           model: model.subsidiary,
           as: "division",
-          attributes: ["id", "name"]
+          attributes: ["id", "name"],
         },
         {
           model: model.user,
           as: "createdBy",
-          attributes: ["id", "firstName", "lastName"]
+          attributes: ["id", "firstName", "lastName"],
         },
         {
-          model: model.issue
+          model: model.issue,
         },
         {
           model: model.truck,
-          attributes: ["id", "unitNo"]
-        }
+          attributes: ["id", "unitNo"],
+        },
       ],
       attributes: {
         exclude: [
@@ -35,10 +35,10 @@ module.exports = {
           "divisionId",
           "createdAt",
           "updatedAt",
-          "truckId"
-        ]
-      }
-    }).catch(err => {
+          "truckId",
+        ],
+      },
+    }).catch((err) => {
       console.dir(err);
       STATUS.DB_ERROR(res, err); // send Database Error
     });
@@ -76,9 +76,9 @@ module.exports = {
   remove: async (req, res) => {
     let po = await model.PO.destroy({
       where: {
-        id: req.body.id
-      }
-    }).catch(err => {
+        id: req.body.id,
+      },
+    }).catch((err) => {
       STATUS.DB_ERROR(res, err);
     });
 
@@ -96,11 +96,11 @@ module.exports = {
           req.body.issues,
           "issue",
           transaction,
-	req.body.id
+          req.body.id
         );
       }
     } catch (err) {
-	    console.log(err);
+      console.log(err);
       STATUS.DB_ERROR(res, err);
     }
 
@@ -109,5 +109,5 @@ module.exports = {
     } else {
       STATUS.NOT_FOUND(res);
     }
-  }
+  },
 };
