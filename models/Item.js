@@ -5,32 +5,32 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
       unique: true,
-      allowNull: false
+      allowNull: false,
     },
     code: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false
+      allowNull: false,
     },
     partNo: {
       type: DataTypes.STRING,
       unique: false,
-      allowNull: true
+      allowNull: true,
     },
     description: {
       type: DataTypes.STRING,
       unique: false,
-      allowNull: true
+      allowNull: true,
     },
     equipmentType: {
       type: DataTypes.ENUM(["TRUCK", "TRAILER"]),
       unique: false,
-      allowNull: true
+      allowNull: true,
     },
     quantityUnit: {
       type: DataTypes.ENUM([
@@ -47,19 +47,20 @@ module.exports = (sequelize, DataTypes) => {
         "PKG",
         "SKD",
         "UNT",
-        "BAGS"
+        "BAGS",
       ]),
       unique: false,
-      allowNull: true
+      allowNull: true,
     },
     status: {
       type: DataTypes.ENUM(["ACTIVE", "INACTIVE"]),
-      allowNull: false
-    }
+      allowNull: false,
+    },
   });
 
-  Item.associate = model => {
+  Item.associate = (model) => {
     Item.belongsTo(model.class, { as: "category" });
+    Item.hasMany(model.priceListing);
   };
 
   return Item;

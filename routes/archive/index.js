@@ -16,6 +16,7 @@ const customer = require("./customer");
 const billTo = require("./billTo");
 const vendor = require("./vendor");
 const item = require("./item");
+const itempricing = require("./itempricing");
 const trailer = require("./trailer");
 
 router.get("/", (req, res, next) => {
@@ -39,5 +40,6 @@ router.use("/billing", billTo);
 // router for new controllers
 vendor(router);
 item(router);
+itempricing(router);
 
 module.exports = router;

@@ -1,5 +1,4 @@
 const controller = require("../controller/user");
-const pricelisting = require("../controller/pricelisting");
 const safetyitem = require("../controller/safety");
 const safetygroup = require("../controller/safetygroup");
 const todo = require("./todo");
@@ -15,8 +14,6 @@ module.exports = (router) => {
   router.route("/login").post(controller.login);
 
   router.route("/changePassword").post(controller.changePassword);
-
-  router.route("/pricelisting").post(pricelisting.add).get(pricelisting.get);
 
   router
     .route("/safety")

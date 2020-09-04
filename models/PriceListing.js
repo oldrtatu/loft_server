@@ -61,5 +61,10 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  PriceListing.associate = (models) => {
+    PriceListing.belongsTo(models.item);
+    PriceListing.belongsTo(models.vendor);
+  };
+
   return PriceListing;
 };
