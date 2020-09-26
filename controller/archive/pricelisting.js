@@ -2,19 +2,9 @@ const model = require("../../models");
 const STATUS = require("../../utils/resTransformer");
 const BULK = require("../../services/bulkCreate");
 const item = require("./item");
+const DateHelpers = require("../../utils/DateHelpers");
 
-function formatDate(date) {
-  var d = new Date(date),
-    month = "" + (d.getMonth() + 1),
-    day = "" + d.getDate(),
-    year = d.getFullYear();
-
-  if (month.length < 2) month = "0" + month;
-  if (day.length < 2) day = "0" + day;
-
-  return [year, month, day].join("-");
-}
-
+const formatDate = DateHelpers.formatDate
 function FormatData(item) {
   let data = JSON.parse(JSON.stringify(item));
   data.quotationDate = formatDate(data.quotationDate);

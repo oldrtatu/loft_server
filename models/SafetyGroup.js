@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
 
   SafetyGroup.associate = models =>{
     SafetyGroup.hasMany(models.safetyJoin)
+    SafetyGroup.hasMany(models.truckSafety)
   }
 
   return SafetyGroup;

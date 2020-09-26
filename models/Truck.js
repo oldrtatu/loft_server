@@ -32,6 +32,10 @@ module.exports = (sequelize, DataTypes) => {
     Truck.hasOne(model.truckRegistration, {
       onDelete: "CASCADE"
     });
+    Truck.hasOne(model.truckOdometer, {
+      onDelete: "CASCADE"
+    });
+    Truck.hasMany(model.truckSafety)
   };
 
   return Truck;

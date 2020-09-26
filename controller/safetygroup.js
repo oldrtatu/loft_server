@@ -30,14 +30,22 @@ module.exports = {
   add: async (req, res) => {
     const transaction = await model.sequelize.transaction();
     try {
-      let group = await model.safetyGroup.create({ name: req.body.name });
+      let truckId;
+      let data = req.body
+      if(data.truckId){
+        truckId = data.truckId
+        delete data.truckId
+      }
+      let group = await model.safetyGroup.create({ name: data.name });
       let join = await BULK.bulkSafetyGroupCreate(
-        req.body.items,
+        data.items,
         group.id,
         "safetyJoin",
         transaction
       );
-
+      if(truckId){
+        await model.truckSafety.create({truckId,safetyGroupId:group.id})
+      }
       await transaction.commit();
 
       if (join) {
